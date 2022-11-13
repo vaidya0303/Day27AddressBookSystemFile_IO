@@ -3,10 +3,11 @@ package com.day27;
 /**
  * import all class in util package
  * import collectors class
+ * import function class
  */
-
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.function.Function;
 
 /**
  * create a class name as AddressBookSystem
@@ -16,7 +17,7 @@ public class AddressBookSystem {
      * create a arraylist object name as contactList
      * Store the person all details in object
      */
-    public ArrayList<Contacts> contactList = new ArrayList<>();
+    public static ArrayList<Contacts> contactList = new ArrayList<>();
 
     /**
      * create a object for map,object name is nameHashMap
@@ -33,6 +34,9 @@ public class AddressBookSystem {
      * store the State of person in this object
      */
     public static Map<String, Contacts> stateHashMap = new HashMap<String, Contacts>();
+
+    static Scanner sc = new Scanner(System.in);
+    static AddressBookSystem addressBook = new AddressBookSystem();
 
     /**
      * create a method name as addContact,this is parameterized method
@@ -97,6 +101,14 @@ public class AddressBookSystem {
 
     public static void viewByState(Map<String, Contacts> stateHashMap) {
         stateHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "=" + e.getValue().toString()));
+    }
+
+    public static List<Contacts> sortBy(Function<? super Contacts, ? extends String> key) {
+        return contactList.stream().sorted(Comparator.comparing(key)).collect(Collectors.toList());
+    }
+
+    public static List<Contacts> sortByZip(Function<? super Contacts, ? extends Long> key) {
+        return contactList.stream().sorted(Comparator.comparing(key)).collect(Collectors.toList());
     }
 
     /**
@@ -461,6 +473,46 @@ public class AddressBookSystem {
                 return;
             default:
                 System.out.println("Invalid Option");
+        }
+    }
+
+    /**
+     * create a method name as sortByOption
+     */
+    public static void sortByOption() {
+        /**
+         * display this options
+         */
+        System.out.println("1. By first name");
+        System.out.println("2. By last name");
+        System.out.println("3. By city");
+        System.out.println("4. By state");
+        System.out.println("5. By zip");
+        System.out.println("6. Back");
+        /**
+         * choose the option what u want
+         */
+        System.out.print("Your choice: ");
+
+        int choice = sc.nextInt();
+        sc.nextLine();
+        switch (choice) {
+            case 1:
+                AddressBookSystem.sortBy(Contacts::getFirstName).forEach(System.out::println);
+                break;
+            case 2:
+                AddressBookSystem.sortBy(Contacts::getLastName).forEach(System.out::println);
+                break;
+            case 3:
+                AddressBookSystem.sortBy(Contacts::getCity).forEach(System.out::println);
+                break;
+            case 4:
+                AddressBookSystem.sortBy(Contacts::getState).forEach(System.out::println);
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("INVALID CHOICE!");
         }
     }
 }

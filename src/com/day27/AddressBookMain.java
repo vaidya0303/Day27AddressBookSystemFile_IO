@@ -1,4 +1,5 @@
 package com.day27;
+
 /**
  * UC1 :- Ability to create a Contacts in Address Book with first and last names, address,
  *        city, state, zip, phone number and email...
@@ -11,12 +12,22 @@ package com.day27;
  * UC8 :- Ability to search Person in a City or State across the multiple AddressBook
  * UC9 :- Ability to view Persons by City or State
  * UC10 :- Ability to get number of contact persons i.e. count by City or State
+ * UC11 :- Ability to sort the entries in the address book alphabetically by Person’s name
  */
 
 /**
- * import class
+ * import hashmap class
+ * import Iterator class
+ * Import map class
+ * Import scanner class
+ * Import set class
  */
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
 
 /**
  * create a class name as AddressBookMain
@@ -107,7 +118,7 @@ public class AddressBookMain {
                     addressBook.viewByOption(addressBookMap);
                     break;
                 case 6:
-                    System.out.println("Welcome to the couter");
+                    System.out.println("Welcome to the counter");
                     addressBook.countByOption();
                     break;
                 case 7:
@@ -116,6 +127,7 @@ public class AddressBookMain {
                      */
                     sc.close();
                     return;
+
                 default:
                     System.out.println("You Entered Invalid Choice....!");
                     break;
