@@ -8,11 +8,11 @@ package com.day27;
  * UC4 :- Ability to delete a person using person's name
  * UC5 :- Ability to add multiple person to Address Book
  * UC6 :- Refactor to add multiple Address Book to the System Each Address Book has a unique Name
- *
+ * UC7 :- Ability to ensure there is no Duplicate Entry of the same Person in a particular Address Book
  */
 
 /**
- * import scanner class and arraylist class
+ * import scanner class and arraylist class, hashmap class
  */
 
 import java.util.ArrayList;
@@ -22,13 +22,13 @@ import java.util.Scanner;
 /**
  * create a main class name as AddressBookSystem
  */
-public class AddressBookSystem{
+public class AddressBookSystem<details>{
     /**
      * create a array list object
      * The ArrayList class of the Java collections framework provides the functionality of resizable-arrays.
      * It implements the List interface.
      */
-    ArrayList<Contacts> arrayDetails = new ArrayList<Contacts>();
+    static ArrayList<Contacts> arrayDetails = new ArrayList<Contacts>();
     /**
      * The Scanner class is used to get user input, and it is found in the java.util package.
      * create a scanner class object
@@ -180,6 +180,34 @@ public class AddressBookSystem{
     }
 
     /**
+     * Method to check for duplicate entry before adding the person.
+     * @param firstName in address book
+     */
+    public void duplicateCheck(String firstName) {
+        /**
+         * for loop is used check the condition if condition is true
+         * then element at the specified position in this list in arrayDetails all store in contactName
+         */
+        for (int k = 0; k < arrayDetails.size(); k++) {
+            String contactName = arrayDetails.get(k).getFirstName();
+
+            /**
+             * if 1st name in address boook is present equal to prent in contactName
+             * then print this person is already present otherwise
+             */
+            if (firstName.equals(contactName)) {
+                System.out.println("This Person is Already Present");
+                /**
+                 * print you can add this person
+                 */
+            } else {
+                System.out.println("You can Add this Person");
+                break;
+            }
+        }
+    }
+
+    /**
      * create a method name as createAddressBook
      */
     public void createAddressBook() {
@@ -233,6 +261,10 @@ public class AddressBookSystem{
                         System.out.println("Choose what you want to do: ");
                         System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact. \n4.Display Contact\n5.Exit");
                         int choose1 = sc.nextInt();
+                        /**
+                         * if all the details in fill then if u enter or choose 4 then u r exist in process
+                         * and start with agin new address book
+                         */
                         if (choose1 == 4) {
                             System.out.println("Exited");
                             break;
@@ -351,5 +383,6 @@ public class AddressBookSystem{
          * here object is details and method is createAddressBook()
          */
         details.createAddressBook();
+
     }
 }
